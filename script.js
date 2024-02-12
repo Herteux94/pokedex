@@ -3,16 +3,52 @@ function hide(i) {
     document.getElementById('pokeChartContainer').classList.remove('dNone');
     document.getElementById(`pokeChartContainerChild${i}`).classList.remove('dNone');
     document.getElementById(`pokeChartContainerChild2-${i}`).classList.remove('dNone');
+    document.getElementById('pokemonLogo').classList.add('dNone');
+    document.getElementById('button-80').classList.add('dNone');
 }
 
 
-function show(i) {
+function show() {
     document.getElementById('pokeCardContainer').classList.remove('dNone');
     document.getElementById('pokeChartContainer').classList.add('dNone');
+    document.getElementById('pokemonLogo').classList.remove('dNone');
+    document.getElementById('button-80').classList.remove('dNone');
 }
 
 
-function backgroundColorCard(i) {
+function showAbout(i) {
+    document.getElementById(`about${i}`).classList.remove('dNone');
+    document.getElementById(`baseStats${i}`).classList.add('dNone');
+    // document.getElementById(`evolution${i}`).classList.add('dNone');
+    document.getElementById(`moves${i}`).classList.add('dNone');
+}
+
+
+function showBaseStats(i) {
+    document.getElementById(`baseStats${i}`).classList.remove('dNone');
+    document.getElementById(`about${i}`).classList.add('dNone');
+    // document.getElementById(`evolution${i}`).classList.add('dNone');
+    document.getElementById(`moves${i}`).classList.add('dNone');
+}
+
+
+// function showEvolution(i) {
+//     document.getElementById(`evolution${i}`).classList.remove('dNone');
+//     document.getElementById(`about${i}`).classList.add('dNone');
+//     document.getElementById(`baseStats${i}`).classList.add('dNone');
+//     document.getElementById(`moves${i}`).classList.add('dNone');
+// }
+
+
+function showMoves(i) {
+    document.getElementById(`moves${i}`).classList.remove('dNone');
+    document.getElementById(`about${i}`).classList.add('dNone');
+    document.getElementById(`baseStats${i}`).classList.add('dNone');
+    // document.getElementById(`evolution${i}`).classList.add('dNone');
+}
+
+
+function addBackgroundColorCard(i) {
     let pokeTypeName = currentPokemon['types'][0]['type']['name'];
     checkTypes(i, pokeTypeName);
 }
@@ -34,6 +70,7 @@ function checkTypes(i, pokeTypeName) {
     rock(i, pokeTypeName);
     ice(i, pokeTypeName);
     dragon(i, pokeTypeName);
+    ghost(i, pokeTypeName);
 }
 
 
@@ -53,6 +90,7 @@ function addColorTypeSmall(i, j) {
     rockSmall(i, j);
     iceSmall(i, j);
     dragonSmall(i, j);
+    ghostSmall(i, j);
 }
 
 
@@ -175,6 +213,13 @@ function dragon(i, pokeTypeName) {
     }
 }
 
+
+function ghost(i, pokeTypeName) {
+    if (pokeTypeName === 'ghost') {
+        document.getElementById(`pokeCard${i}`).classList.add('ghostCard');
+        document.getElementById(`pokeChartContainerChild${i}`).classList.add('ghostCard');
+    }
+}
 
 
 function grassSmall(i, j) {
@@ -300,5 +345,14 @@ function dragonSmall(i, j) {
     if (pokeTypeName === 'dragon') {
         document.getElementById(`pokeTypes${i}-${j}`).classList.add('dragonType');
         document.getElementById(`pokeTypesChart${i}-${j}`).classList.add('dragonType');
+    }
+}
+
+
+function ghostSmall(i, j) {
+    let pokeTypeName = currentPokemon['types'][j]['type']['name'];
+    if (pokeTypeName === 'ghost') {
+        document.getElementById(`pokeTypes${i}-${j}`).classList.add('ghostType');
+        document.getElementById(`pokeTypesChart${i}-${j}`).classList.add('ghostType');
     }
 }
