@@ -1,9 +1,7 @@
-// TO DO
-// Bilder austauschen, gibt unter sprites und other mehr Bilder
-// pop over als Startseite: Hier soll eingetragen, wie viele Pokemon angezeigt werden
+setTimeout(autoScrollToElement, 2000);
 
 
-function onload() {
+function onloadStart() {
     loadPokemon();
 }
 
@@ -28,7 +26,7 @@ async function loadPokemon() {
 
 
 async function showRest(){
-    for (i = 22; i < 152; i++) {
+    for (i = 23; i < 152; i++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${i}/`;
         let urlSpecies = `https://pokeapi.co/api/v2/pokemon-species/${i}/`;
         let urlEvolution = `https://pokeapi.co/api/v2/evolution-chain/${i}/`;
@@ -71,9 +69,10 @@ function addInfos(i) {
 function renderCardStructure(i) { //render structur for overview of all pokemon
     let pokeCardContainer = document.getElementById('pokeCardContainer');
     pokeCardContainer.innerHTML += `
-            <div class="pokeCard" id="pokeCard${i}" onclick="hide(${i})">
+            <div class="pokeCard" id="pokeCard${i}" onclick="showOnePokemon(${i})">
                 <div class="spaceBetween styleh1PokeNames">
-                    <h1 id="pokeName${i}" class="h1PokeNames">#${i} - </h1>
+                    <h1 class="h1PokeNames dFlex">#${i}</h1>
+                    <h1 id="pokeName${i}" class="h1PokeNames"></h1>
                     <img src="#" alt="pokemon" id="pokeImg${i}" class="pokeImg">
                 </div>
                 <div id="pokeTypes${i}" class="spaceAround">    
@@ -89,7 +88,7 @@ function renderPokeChart(i) { //render structur for single pokemon
     <div id="pokeChartContainerChild${i}" class="dNone pokeChartContainerChild column">
         <div class="styleChartTop1">
             <div class="spaceBetween">
-               <a href="all-pokemon.html"> <img src="./img/back-arrow-white.png" alt="go-back-arrow" id="arrowBack" onclick="show()"></a>
+               <img src="./img/back-arrow-white.png" alt="go-back-arrow" id="arrowBack" onclick="showAllPokemon(${i})">
             </div>
             <div>
                 <h1 id="pokeNameChart${i}"></h1>
@@ -111,7 +110,7 @@ function renderPokeChart(i) { //render structur for single pokemon
         </div>
         <div id="about${i}" ></div>
         <div id="baseStats${i}" class="dNone"></div>
-        <div id="moves${i}" class="dNone dWrap"></div>
+        <div id="moves${i}" class="dNone dWrap styleMoves"></div>
     </div>
     `;
 }
@@ -157,43 +156,43 @@ function renderPokeChartBaseStats(i) { //rendering structur for infos "base stat
         `
                 <div class="styleBaseStats">
                     <div class="styleProgressBar">
-                        <div id="hp${i}" class="spaceAround w66">HP: </div>
+                        <span id="hp${i}" class="spaceAround w66">HP: </span>
                         <div class="progressBar">
                             <div class="progress" id="hpProgress${i}"></div>
                         </div>
                     </div>
                     <div class="styleProgressBar">
-                        <div id="attack${i}" class="spaceAround w66">Attack: </div>
+                        <span id="attack${i}" class="spaceAround w66">Attack: </span>
                         <div class="progressBar">
                             <div class="progress" id="attackProgress${i}"></div>
                         </div>
                     </div>
                     <div class="styleProgressBar">
-                        <div id="defense${i}" class="spaceAround w66">Defense: </div>
+                        <span id="defense${i}" class="spaceAround w66">Defense: </span>
                         <div class="progressBar">
                             <div class="progress" id="defenseProgress${i}"></div>
                         </div>
                     </div>
                     <div class="styleProgressBar">
-                        <div id="spAttack${i}" class="spaceAround w66">Sp. Atk: </div>
+                        <span id="spAttack${i}" class="spaceAround w66">Sp. Atk: </span>
                         <div class="progressBar">
                             <div class="progress" id="spAttackProgress${i}"></div>
                         </div>
                     </div>
                     <div class="styleProgressBar">
-                        <div id="spDefense${i}" class="spaceAround w66">Sp. Def: </div>
+                        <span id="spDefense${i}" class="spaceAround w66">Sp. Def: </span>
                         <div class="progressBar">
                             <div class="progress" id="spDefenseProgress${i}"></div>
                         </div>
                     </div>
                     <div class="styleProgressBar">
-                        <div id="speed${i}" class="spaceAround w66">Speed: </div>
+                        <span id="speed${i}" class="spaceAround w66">Speed: </span>
                         <div class="progressBar">
                             <div class="progress" id="speedProgress${i}"></div>
                         </div>
                     </div>
                     <div class="styleProgressBar">
-                        <div id="totalStats${i}" class="spaceAround w66">Total: </div>
+                        <span id="totalStats${i}" class="spaceAround w66">Total: </span>
                         <div class="progressBar">
                             <div class="progress" id="totalStatsProgress${i}"></div>
                         </div>
@@ -203,49 +202,12 @@ function renderPokeChartBaseStats(i) { //rendering structur for infos "base stat
 }
 
 
-// function renderPokeChartEvolution(i) { //rendering structur for infos "evolution" 
-//     let pokeChartEvolutionContainer = document.getElementById(`evolution${i}`);
-//     pokeChartEvolutionContainer.innerHTML +=
-//         `
-//     <div>
-//         <div>  
-//         <h2 id="pokeEvolution1-${i}"></h2>
-//             <img src="" alt="">
-//         </div>
-//         <div>
-//             <img src="" alt="">
-//             <h3></h3>
-//         <div>
-//             <h2 id="pokeEvolution2-${i}"></h2>
-//             <img src="" alt="">
-//         </div>
-//     </div>
-//     <div>
-//         <div>  
-//         <h2 id="pokeEvolution2-${i}"></h2>
-//             <img src="" alt="">
-//         </div>
-//         <div>
-//             <img src="" alt="">
-//             <h3></h3>
-//         <div>
-//             <h2 id="pokeEvolution3-${i}"></h2>
-//             <img src="" alt="">
-//         </div>
-//     </div>
-//     `;
-// }
-
-
 function renderPokeChartMoves(i) { //rendering structur for infos "moves" 
     let pokeChartMovesContainer = document.getElementById(`moves${i}`);
     for (j = 0; j < currentPokemon['moves'].length; j++) {
         pokeChartMovesContainer.innerHTML +=
             `
-    <table>
-        
-    <tr id="moves${i}-${j}"></tr>
-    </table>
+    <span id="moves${i}-${j}"></span>
     `;
     }
 }
@@ -288,12 +250,7 @@ function addBaseStats(i) { // add "about" infos from api
     let spAttack = currentPokemon['stats'][3]['base_stat'];
     let spDefense = currentPokemon['stats'][4]['base_stat'];
     let speed = currentPokemon['stats'][5]['base_stat'];
-
     let totalStats = hp + attack + defense + spAttack + spDefense + speed;
-
-    
-    
-
     document.getElementById(`hp${i}`).innerHTML += hp;
     document.getElementById(`attack${i}`).innerHTML += attack;
     document.getElementById(`defense${i}`).innerHTML += defense;
@@ -301,7 +258,6 @@ function addBaseStats(i) { // add "about" infos from api
     document.getElementById(`spDefense${i}`).innerHTML += spDefense;
     document.getElementById(`speed${i}`).innerHTML += speed;
     document.getElementById(`totalStats${i}`).innerHTML += totalStats;
-
     addDataProgressBar(i, hp, attack, defense, spDefense, spAttack, speed, totalStats);
 }
 
@@ -352,3 +308,55 @@ function addDataProgressBar(i, hp, attack, defense, spDefense, spAttack, speed, 
     document.getElementById(`speedProgress${i}`).style.width += speed + '%';
     document.getElementById(`totalStatsProgress${i}`).style.width += (totalStats/6) + '%';
 }
+
+
+// Funktion zum automatischen Scrollen
+function autoScrollToElement() {
+    let searchInput = document.getElementById('searchInput');
+    let offset = 40; // Der Abstand zum oberen Rand, den wir erreichen wollen
+    let distanceToTop = searchInput.getBoundingClientRect().top;
+
+    // Wenn der Abstand zum oberen Rand größer als 40px ist, scrollen wir zum Element
+    if (distanceToTop > offset) {
+        window.scroll({
+            behavior: 'smooth',
+            left: 0,
+            top: distanceToTop - offset // Abstand von der aktuellen Position
+        });
+    }
+}
+
+
+
+window.addEventListener('scroll', function() {
+    let searchInput = document.getElementById('searchInput');
+    let offset = 40; // Der Abstand zum oberen Rand, den wir erreichen wollen
+    let distanceToTop = searchInput.getBoundingClientRect().top;
+
+    // Überprüfen, ob der Abstand zum oberen Rand kleiner oder gleich 40px ist
+    if (distanceToTop <= offset) {
+        searchInput.classList.add('fixed'); // Füge die CSS-Klasse 'fixed' hinzu
+    } else {
+        searchInput.classList.remove('fixed'); // Entferne die CSS-Klasse 'fixed'
+    }
+});
+// Die Funktion autoScrollToElement wird nach 3 Sekunden aufgerufen
+
+
+
+// JavaScript-Code, um das Verhalten des Placeholder-Textes zu steuern
+window.onload = function() {
+    let searchInput = document.getElementById('searchInput');
+
+    // Eventlistener für den Klick auf das Inputfeld
+    searchInput.addEventListener('focus', function() {
+        // Entferne den Placeholder-Text, wenn das Inputfeld fokussiert ist
+        this.placeholder = '';
+    });
+
+    // Eventlistener für den Verlust des Fokus auf das Inputfeld
+    searchInput.addEventListener('blur', function() {
+        // Füge den Placeholder-Text wieder ein, wenn das Inputfeld den Fokus verliert
+        this.placeholder = 'Find Pokemon';
+    });
+};
