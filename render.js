@@ -306,5 +306,3 @@ function addDataProgressBar(i, hp, attack, defense, spDefense, spAttack, speed, 
     document.getElementById(`speedProgress${i}`).style.width += speed + '%';
     document.getElementById(`totalStatsProgress${i}`).style.width += (totalStats/6) + '%';
 }
-
-

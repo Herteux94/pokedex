@@ -602,7 +602,8 @@ h2 {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 9; /* Z-Index kann je nach Anforderung angepasst werden */
+    z-index: 9;
+    /* Z-Index kann je nach Anforderung angepasst werden */
 }
 
 
@@ -747,6 +748,14 @@ h2 {
 }
 
 
+.styleMoves {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* Damit der Scrollbalken erscheint */
+    padding-bottom: 30vh;
+}
+
+
 @media (max-width: 1300px) {
 
 
@@ -851,6 +860,8 @@ h2 {
         font-size: 16px;
         padding-right: 40px;
         padding-left: 40px;
+        height: 400px;
+        width: 80vw;
     }
 
 
@@ -880,10 +891,15 @@ h2 {
     }
 
 
-    .pokeCard{
+    .pokeCard {
         margin-left: 0;
         margin-right: 0;
         width: 100%;
+    }
+
+
+    .styleMoves {
+        padding-right: 0;
     }
 
 
@@ -926,5 +942,12 @@ h2 {
     .stylePokeTypes {
         flex-direction: column;
         max-width: 24px;
+    }
+}
+
+
+@media (max-width: 200px){
+    .styleMoves {
+        padding-left: 16px;
     }
 }
