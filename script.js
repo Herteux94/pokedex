@@ -1,6 +1,9 @@
 let typesOfElements = ['grass', 'fire', 'water', 'poison', 'bug', 'normal', 'flying', 'electric', 'fairy', 'ground', 'fighting', 'psychic', 'rock', 'ice', 'dragon', 'ghost']
 
 
+setTimeout(autoScrollToElement, 2000);
+
+
 function showOnePokemon(i) {
     document.getElementById('pokeCardContainer').classList.add('dNone');
     document.getElementById('pokeChartContainer').classList.remove('dNone');
@@ -73,8 +76,6 @@ function addColorTypeSmall(i, j) {
 }
 
 
-
-
 function searchPokemon() {
     let searchPokemon = document.getElementById('searchInput').value.toLowerCase();
     let pokeCardContainer = document.getElementById('pokeCardContainer');
@@ -94,3 +95,52 @@ function searchPokemon() {
 }
 
 
+// Funktion zum automatischen Scrollen
+function autoScrollToElement() {
+    let searchInput = document.getElementById('searchInput');
+    let offset = 40; // Der Abstand zum oberen Rand, den wir erreichen wollen
+    let distanceToTop = searchInput.getBoundingClientRect().top;
+
+    // Wenn der Abstand zum oberen Rand größer als 40px ist, scrollen wir zum Element
+    if (distanceToTop > offset) {
+        window.scroll({
+            behavior: 'smooth',
+            left: 0,
+            top: distanceToTop - offset // Abstand von der aktuellen Position
+        });
+    }
+}
+
+
+window.addEventListener('scroll', function() {
+    let searchInput = document.getElementById('searchInput');
+    let offset = 40; // Der Abstand zum oberen Rand, den wir erreichen wollen
+    let distanceToTop = searchInput.getBoundingClientRect().top;
+
+    // Überprüfen, ob der Abstand zum oberen Rand kleiner oder gleich 40px ist
+    if (distanceToTop <= offset) {
+        searchInput.classList.add('fixed'); // Füge die CSS-Klasse 'fixed' hinzu
+    } else {
+        searchInput.classList.remove('fixed'); // Entferne die CSS-Klasse 'fixed'
+    }
+});
+// Die Funktion autoScrollToElement wird nach 2 Sekunden aufgerufen
+
+
+function clearPlaceholder() {
+    let searchInput = document.getElementById('searchInput');
+
+    // Eventlistener für den Klick auf das Inputfeld
+    searchInput.addEventListener('focus', function() {
+        // Speichern Sie den aktuellen Placeholder-Text
+        this.dataset.placeholder = this.placeholder;
+        // Entferne den Placeholder-Text, wenn das Inputfeld fokussiert ist
+        this.placeholder = '';
+    });
+
+    // Eventlistener für den Verlust des Fokus auf das Inputfeld
+    searchInput.addEventListener('blur', function() {
+        // Füge den Placeholder-Text wieder ein, wenn das Inputfeld den Fokus verliert
+        this.placeholder = this.dataset.placeholder;
+    });
+};
