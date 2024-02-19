@@ -5,13 +5,14 @@ setTimeout(autoScrollToElement, 2000);
 
 
 function showOnePokemon(i) {
-    document.getElementById('pokeCardContainer').classList.add('dNone');
+
     document.getElementById('pokeChartContainer').classList.remove('dNone');
     document.getElementById(`pokeChartContainerChild${i}`).classList.remove('dNone');
     document.getElementById(`pokeChartContainerChild2-${i}`).classList.remove('dNone');
     document.getElementById('pokemonLogo').classList.add('dNone');
     document.getElementById('button-80').classList.add('dNone');
     document.getElementById('searchInput').classList.add('dNone');
+    document.getElementById('pokeCardContainer').classList.add('fixed');
 }
 
 
@@ -23,6 +24,27 @@ function showAllPokemon(i) {
     document.getElementById(`pokeChartContainerChild${i}`).classList.add('dNone');
     document.getElementById(`pokeChartContainerChild2-${i}`).classList.add('dNone');
     document.getElementById('searchInput').classList.remove('dNone');
+    document.getElementById('pokeCardContainer').classList.remove('fixed');
+}
+
+
+
+
+
+function hidePokemonCards(i) {
+    if (i > 24) {
+        document.getElementById(`pokeCard${i}`).classList.add('dNone');
+    }
+}
+
+
+function showPokemonCards() {
+    let c = 50;
+
+    for (i = 25; i < c; i++) {
+        document.getElementById(`pokeCard${i}`).classList.remove('dNone');
+    }
+    c = c + 25;
 }
 
 
@@ -50,7 +72,7 @@ function showMoves(i) {
 
 
 function addBackgroundColorCard(i) {
-    let pokeTypeName = currentPokemon['types'][0]['type']['name'];
+    let pokeTypeName = currentPokemon[i]['types'][0]['type']['name'];
     checkTypes(i, pokeTypeName);
 }
 
@@ -66,7 +88,7 @@ function checkTypes(i, pokeTypeName) {
 
 
 function addColorTypeSmall(i, j) {
-    let pokeTypeName = currentPokemon['types'][j]['type']['name'];
+    let pokeTypeName = currentPokemon[i]['types'][j]['type']['name'];
     for (t = 0; t < typesOfElements.length; t++) {
         if (pokeTypeName === typesOfElements[t]) {
             document.getElementById(`pokeTypes${i}-${j}`).classList.add(`${typesOfElements[t]}Type`);
@@ -81,7 +103,7 @@ function searchPokemon() {
     let pokeCardContainer = document.getElementById('pokeCardContainer');
     let pokeCards = pokeCardContainer.getElementsByClassName('pokeCard');
 
-    for (let i = 1; i < pokeCards.length +1 ; i++) {
+    for (let i = 0; i < pokeCards.length + 1; i++) {
         let pokeNameElement = document.getElementById(`pokeName${i}`);
         if (pokeNameElement) {
             let pokeName = document.getElementById(`pokeName${i}`).innerHTML.toLowerCase();
@@ -112,7 +134,7 @@ function autoScrollToElement() {
 }
 
 
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function () {
     let searchInput = document.getElementById('searchInput');
     let offset = 40; // Der Abstand zum oberen Rand, den wir erreichen wollen
     let distanceToTop = searchInput.getBoundingClientRect().top;
@@ -131,7 +153,7 @@ function clearPlaceholder() {
     let searchInput = document.getElementById('searchInput');
 
     // Eventlistener für den Klick auf das Inputfeld
-    searchInput.addEventListener('focus', function() {
+    searchInput.addEventListener('focus', function () {
         // Speichern Sie den aktuellen Placeholder-Text
         this.dataset.placeholder = this.placeholder;
         // Entferne den Placeholder-Text, wenn das Inputfeld fokussiert ist
@@ -139,7 +161,7 @@ function clearPlaceholder() {
     });
 
     // Eventlistener für den Verlust des Fokus auf das Inputfeld
-    searchInput.addEventListener('blur', function() {
+    searchInput.addEventListener('blur', function () {
         // Füge den Placeholder-Text wieder ein, wenn das Inputfeld den Fokus verliert
         this.placeholder = this.dataset.placeholder;
     });

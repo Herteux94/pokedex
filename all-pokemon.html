@@ -6,22 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
     <link rel="stylesheet" href="style.css">
-    <script src="render.js"></script>
+    <script src="test.js"></script>
     <script src="script.js"></script>
     <link rel="icon" type="image/x-icon" href="./img/favicon.png">
 </head>
 
-<body class="backgroundBody" onload="onload()">
-    <div class="center"><img src="./img/pokemon-logo.png" alt="pokemon logo" id="pokemonLogo"></div>
-    
-    <form onsubmit="event.preventDefault(); searchPokemon()" class="center">
-        <input id="searchInput" type="text" placeholder="Find Pokemon">
-    </form>
+<body onload="onload()">
+    <div>
+        <div class="center"><img src="./img/pokemon-logo.png" alt="pokemon logo" id="pokemonLogo"></div>
+        <form onsubmit="event.preventDefault(); searchPokemon()" class="center w100">
+            <input id="searchInput" type="text" placeholder="Find Pokemon">
+        </form>
+    </div>
     <div id="pokeCardContainer">
     </div>
     <div id="pokeChartContainer" class="dNone center"></div>
     <div class="center">
-        <button class="button-80" id="button-80" role="button" onclick="showRest()">150 Pokemon zeigen</button>
+        <button class="button-80" id="button-80" role="button" onclick="showMorePokemon()">Mehr Pokemon
+            zeigen</button>
     </div>
 </body>
 
