@@ -3,6 +3,7 @@ currentPokemon = [];
 
 async function onload() {
     await init();
+    await init2()
     render();
 
 }
@@ -18,10 +19,18 @@ async function loadPokemon(i) {
 
 
 async function init() {
-    for (let i = 1; i < 49; i++) {
+    for (let i = 1; i < 25; i++) {
         await loadPokemon(i);
     }
 }
+
+
+async function init2() {
+    for (let i = 25; i < 49; i++) {
+        await loadPokemon(i);
+    }
+}
+
 
 
 function render() {
